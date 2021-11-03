@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://regionsEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.shop.web.screens.regions">
+    <data>
+        <instance id="regionsDc"
+                  class="com.company.shop.entity.Regions">
+            <view extends="_minimal">
+                <property name="oblasts"/>
+                <property name="city"/>
+            </view>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="regionsDc">
+            <column width="350px">
+                <lookupField id="oblastsField" property="oblasts"/>
+                <textField id="cityField" property="city"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

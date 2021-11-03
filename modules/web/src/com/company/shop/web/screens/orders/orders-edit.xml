@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://ordersEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.shop.web.screens.orders">
+    <data>
+        <instance id="ordersDc"
+                  class="com.company.shop.entity.Orders">
+            <view extends="_minimal">
+                <property name="regions" view="_minimal">
+                    <property name="oblasts"/>
+                    <property name="city"/>
+                </property>
+                <property name="givedate"/>
+                <property name="takedate"/>
+                <property name="item" view="_minimal">
+                    <property name="name"/>
+                    <property name="model"/>
+                    <property name="color"/>
+                    <property name="price"/>
+                    <property name="category"/>
+                </property>
+            </view>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="ordersDc">
+            <column width="350px">
+                <pickerField id="regionsField" property="regions">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+                <dateField id="givedateField" property="givedate"/>
+                <dateField id="takedateField" property="takedate"/>
+                <pickerField id="itemField" property="item">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

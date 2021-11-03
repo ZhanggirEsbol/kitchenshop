@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://itemsBrowse.caption"
+        focusComponent="itemsesTable"
+        messagesPack="com.company.shop.web.screens.items">
+    <data readOnly="true">
+        <collection id="itemsesDc"
+                    class="com.company.shop.entity.Items">
+            <view extends="_minimal">
+                <property name="name"/>
+                <property name="model"/>
+                <property name="color"/>
+                <property name="price"/>
+                <property name="category"/>
+            </view>
+            <loader id="itemsesDl">
+                <query>
+                    <![CDATA[select e from shop_Items e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="itemsesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="itemsesTable"
+                dataLoader="itemsesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="itemsesTable"
+                    width="100%"
+                    dataContainer="itemsesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="refresh" type="refresh"/>
+                <action id="excel" type="excel"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="model"/>
+                <column id="color"/>
+                <column id="price"/>
+                <column id="category"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="itemsesTable.create"/>
+                <button id="editBtn" action="itemsesTable.edit"/>
+                <button id="removeBtn" action="itemsesTable.remove"/>
+                <button id="refreshBtn" action="itemsesTable.refresh"/>
+                <button id="excelBtn" action="itemsesTable.excel"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

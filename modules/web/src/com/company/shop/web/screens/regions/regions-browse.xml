@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://regionsBrowse.caption"
+        focusComponent="regionsesTable"
+        messagesPack="com.company.shop.web.screens.regions">
+    <data readOnly="true">
+        <collection id="regionsesDc"
+                    class="com.company.shop.entity.Regions">
+            <view extends="_minimal">
+                <property name="oblasts"/>
+                <property name="city"/>
+            </view>
+            <loader id="regionsesDl">
+                <query>
+                    <![CDATA[select e from shop_Regions e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="regionsesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="regionsesTable"
+                dataLoader="regionsesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="regionsesTable"
+                    width="100%"
+                    dataContainer="regionsesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="refresh" type="refresh"/>
+                <action id="excel" type="excel"/>
+            </actions>
+            <columns>
+                <column id="oblasts"/>
+                <column id="city"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="regionsesTable.create" caption="mainMsg://button.create"/>
+                <button id="editBtn" action="regionsesTable.edit" caption="mainMsg://button.edit"/>
+                <button id="removeBtn" action="regionsesTable.remove" caption="mainMsg://button.remove"/>
+                <button id="refreshBtn" action="regionsesTable.refresh" caption="mainMsg://button.refresh"/>
+                <button id="excelBtn" action="regionsesTable.excel" caption="mainMsg://button.excel"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
